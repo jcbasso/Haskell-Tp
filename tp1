@@ -67,12 +67,3 @@ eEquivChica a xs
 	| otherwise = eEquivChica (a+1) (rotacion xs)
 
 --------------------------------------------------------------------------------------------
-Ejercicio 4 BIS
-erotacion:: Integer -> [Integer] -> [[Integer]]
-erotacion e xs 
-	|e >= long xs = []
-	|head (rotacion xs) == 1 = rotacion xs : erotacion (e+1) (rotacion xs)
-	|otherwise = erotacion (e+1) (rotacion xs) ++ []
-
-eEquivalente:: Integer -> Integer -> [[Integer]]
-eEquivalente n k = erotacion 0 (e n k)
