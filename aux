@@ -1,0 +1,15 @@
+--Ejercicio 2
+--Sin pattern matching
+eChica :: [[Integer]] -> [[Integer]]
+eChica xs 
+	| long xs > 1 && (head xs /= last xs) = [head xs ++ last xs] ++ eChica ( init (tail xs ) ) 
+	| otherwise = xs
+
+--Con pattern matching
+eChica :: [[Integer]] -> [[Integer]]
+eChica [] = []
+eChica [a] = [a]
+eChica (x:xs) = [ x ++ ult ] ++ eChica ( init xs )
+	where ult = last xs
+	
+---------------------------------------
