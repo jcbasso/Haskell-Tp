@@ -1,0 +1,69 @@
+--Cumple la misma funcion que length pero de [a] a Integer
+long :: [a] -> Integer
+long [] = 0
+long x = long (init x) + 1
+
+-------------------------------------------------------------------------------------------
+
+--Pasan un numero a unos/ceros
+unos :: Integer -> [[Integer]]
+unos 0 = []
+unos k = unos (k-1) ++ [[1]]
+
+ceros :: Integer -> [[Integer]]
+ceros 0 = []
+ceros ñ = ceros (ñ-1) ++ [[0]]
+
+--Paso de una lista de listas a una lista 
+aplanar :: [[Integer]] -> [Integer]
+aplanar [] = []
+aplanar (x:xs) = x ++ ( aplanar xs )
+
+--Hace un paso de e
+eChica :: [[Integer]] -> [[Integer]]
+eChica xs 
+	| long xs > 1 && (head xs /= last xs) = [head xs ++ last xs] ++ eChica ( init (tail xs ) ) 
+	| otherwise = xs
+
+--Hago eChica muchas veces
+calcular :: [[Integer]] -> [[Integer]]
+calcular xs
+	| long xs > 1 && (head xs /= last xs) = calcular ( eChica xs ) 
+	| otherwise = xs
+
+--Ejercicio 2
+e :: Integer -> Integer -> [Integer]
+e n k = aplanar ( calcular (unos k ++ ceros (n-k) ) )
+
+-------------------------------------------------------------------------------------------
+
+--Rota 1 vez la lista
+rotacion :: [Integer] -> [Integer]
+rotacion xm = tail xm ++ [head xm]
+
+--Rota hasta que a = long
+arotar :: Integer -> [Integer] -> [Integer] -> Bool
+arotar a xs xm
+	|xs==xm = True
+	|a >= long xs = False
+	|otherwise = arotar (a+1) (rotacion xs) xm
+
+--Ejercicio 3
+equivalente :: [Integer] -> [Integer] -> Bool
+equivalente xm xs  	
+	| long xm /= long xs = False
+	| otherwise = arotar 0 xm xs
+
+--------------------------------------------------------------------------------------------
+
+--Ejercicio 4
+eEquivalentes :: Integer -> Integer -> [[Integer]]
+eEquivalentes n k = eEquivChica 0 (e n k)
+
+eEquivChica :: Integer -> [Integer] -> [[Integer]]
+eEquivChica a xs
+	| a >= long xs = []
+	| head xs == 1 = [xs] ++ eEquivChica (a+1) (rotacion xs)
+	| otherwise = eEquivChica (a+1) (rotacion xs)
+
+--------------------------------------------------------------------------------------------
