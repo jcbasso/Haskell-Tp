@@ -75,3 +75,9 @@ contarUno [] = 0
 contarUno (x:xs)
 	| x == 1 = 1 + ( contarUno xs  )
 	| x /= 1 = contarUno xs
+
+nkEquivalente :: [Integer] -> Bool
+nkEquivalente [1] = True
+nkEquivalente xs
+	| long xs > 1 && equivalente xs ( e ( long xs ) ( contarUno xs ) ) == True = True
+	| otherwise = False
