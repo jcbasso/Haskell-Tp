@@ -69,10 +69,9 @@ eEquivChica a xs
 --------------------------------------------------------------------------------------------
 
 --Ejercicio 5
+--Cuenta cantidad de unos
 contarUno :: [Integer] -> Integer
-contarUno [1] = 1
+contarUno [] = 0
 contarUno (x:xs)
 	| x == 1 = 1 + ( contarUno xs  )
 	| x /= 1 = contarUno xs
-	| otherwise = 0
-contarUno [a] = 0
