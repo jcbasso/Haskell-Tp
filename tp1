@@ -67,3 +67,12 @@ eEquivChica a xs
 	| otherwise = eEquivChica (a+1) (rotacion xs)
 
 --------------------------------------------------------------------------------------------
+
+--Ejercicio 5
+contarUno :: [Integer] -> Integer
+contarUno [1] = 1
+contarUno (x:xs)
+	| x == 1 = 1 + ( contarUno xs  )
+	| x /= 1 = contarUno xs
+	| otherwise = 0
+contarUno [a] = 0
